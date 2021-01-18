@@ -6,8 +6,10 @@ namespace SudokuSolver
     {
         static void Main()
         {
+            //TODO: add sample file
             Console.Write("Enter filename with field (leave blank to use default field.txt): ");
             string filename = Console.ReadLine();
+
             filename = filename == "" ? "field.txt" : filename;
             Game game=new Game("field.txt");
             game.StartSolving();
