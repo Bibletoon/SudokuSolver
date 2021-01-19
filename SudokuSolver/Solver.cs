@@ -2,9 +2,10 @@
 
 namespace SudokuSolver
 {
-    class Solver
+    internal class Solver
     {
         public Field Field { get; set; }
+
         public Solver(Field field)
         {
             this.Field = field;
@@ -16,7 +17,7 @@ namespace SudokuSolver
             {
                 for (int j = 0; j < Field.Width; j++)
                 {
-                    if (Field.GetCell(i,j) == 0) return false;
+                    if (Field.GetCell(i, j) == 0) return false;
                 }
             }
 
@@ -29,26 +30,21 @@ namespace SudokuSolver
             VariantField varField = new VariantField(Field);
             while (!CheckSolved())
             {
-                var (y,x,count) = varField.GetMinimalCell();
+                var (y, x, count) = varField.GetMinimalCell();
                 var cell = varField.GetCell(y, x);
-                if (count==0)
+                if (count == 0)
                 {
                     return false;
                 }
 
-                if (count!=1)
+                if (count != 1)
                 {
                     for (int i = 1; i < VariantField.NumsCount; i++)
                     {
                         if (cell[i] == 1)
                         {
-                            //TODO: check
-                            if (y == 1 && x == 0)
-                            {
-                                Console.Write("");
-                            }
                             var subSolver = new Solver((Field)Field.Clone());
-                            subSolver.Field.SetCell(y,x,i);
+                            subSolver.Field.SetCell(y, x, i);
                             if (subSolver.Solve())
                             {
                                 Field = subSolver.Field;

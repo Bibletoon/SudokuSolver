@@ -2,9 +2,9 @@
 
 namespace SudokuSolver
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Console.Write("Enter filename with field (leave blank to use default field.txt): ");
             string filename = Console.ReadLine();

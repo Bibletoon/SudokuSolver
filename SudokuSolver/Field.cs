@@ -3,14 +3,15 @@ using System.IO;
 
 namespace SudokuSolver
 {
-    class Field : ICloneable
+    internal class Field : ICloneable
     {
         public const int Width = 9;
         public const int Height = 9;
         private readonly int[,] field;
 
-        public Field() {
-            field = new int[Height,Width];
+        public Field()
+        {
+            field = new int[Height, Width];
         }
 
         public Field(string filename) : this()
@@ -19,7 +20,7 @@ namespace SudokuSolver
             using var input = new StreamReader(filename);
             for (int i = 0; i < Height; i++)
             {
-                string line =  input.ReadLine();
+                string line = input.ReadLine();
                 for (int j = 0; j < Width; j++)
                 {
                     int num = Int32.Parse(line[j].ToString());
@@ -61,7 +62,7 @@ namespace SudokuSolver
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    cloneField.SetCell(i, j, field[i,j]);
+                    cloneField.SetCell(i, j, field[i, j]);
                 }
             }
 

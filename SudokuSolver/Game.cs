@@ -3,10 +3,11 @@
 namespace SudokuSolver
 {
     //TODO: add modificator
-    class Game
+    internal class Game
     {
         //TODO: name convention
         private Field field;
+
         private readonly UI UserInterface;
 
         public Game()

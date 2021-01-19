@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SudokuSolver
 {
-    class VariantField
+    internal class VariantField
     {
         public const int NumsCount = 10;
         public int[,,] field;
@@ -29,13 +28,13 @@ namespace SudokuSolver
             {
                 for (int j = 0; j < Field.Width; j++)
                 {
-                    int curNum = field.GetCell(i,j);
+                    int curNum = field.GetCell(i, j);
                     if (curNum != 0) RemoveVariants(i, j, curNum);
                 }
             }
         }
 
-        private void RemoveVariants(int h,int w,int curNum)
+        private void RemoveVariants(int h, int w, int curNum)
         {
             field[h, w, 0] = 0;
             for (int i = 0; i < Field.Height; i++)
@@ -49,11 +48,10 @@ namespace SudokuSolver
             }
 
             var squareCoords = GetSquareCoords(h, w);
-            foreach (var (i,j) in squareCoords)
+            foreach (var (i, j) in squareCoords)
             {
                 field[i, j, curNum] = 0;
             }
-
         }
 
         private List<(int, int)> GetSquareCoords(int h, int w)
@@ -64,34 +62,36 @@ namespace SudokuSolver
             List<int> coordH;
             if (h < 3)
             {
-                coordH = new List<int>{0,1,2};
-            } else if (h > 5)
+                coordH = new List<int> { 0, 1, 2 };
+            }
+            else if (h > 5)
             {
-                coordH = new List<int>{6,7,8};
+                coordH = new List<int> { 6, 7, 8 };
             }
             else
             {
-                coordH = new List<int>{3,4,5};
+                coordH = new List<int> { 3, 4, 5 };
             }
 
             List<int> coordW;
             if (w < 3)
             {
-                coordW = new List<int>{0,1,2};
-            } else if (w > 5)
+                coordW = new List<int> { 0, 1, 2 };
+            }
+            else if (w > 5)
             {
-                coordW = new List<int>{6,7,8};
+                coordW = new List<int> { 6, 7, 8 };
             }
             else
             {
-                coordW = new List<int>{3,4,5};
+                coordW = new List<int> { 3, 4, 5 };
             }
 
             foreach (var i in coordH)
             {
                 foreach (var j in coordW)
                 {
-                    coordList.Add((i,j));
+                    coordList.Add((i, j));
                 }
             }
 
@@ -99,7 +99,7 @@ namespace SudokuSolver
         }
 
         //TODO: named tuple or replace with class
-        public (int,int,int) GetMinimalCell()
+        public (int, int, int) GetMinimalCell()
         {
             (int, int) cell = (-1, -1);
             int minSum = 11;
@@ -117,7 +117,8 @@ namespace SudokuSolver
                     if (sum == 1)
                     {
                         return (i, j, 1);
-                    } else if (sum < minSum)
+                    }
+                    else if (sum < minSum)
                     {
                         minSum = sum;
                         cell = (i, j);
@@ -134,7 +135,7 @@ namespace SudokuSolver
             List<int> cell = new List<int>();
             for (int i = 0; i < NumsCount; i++)
             {
-                cell.Add(field[h,w,i]);
+                cell.Add(field[h, w, i]);
             }
             return cell.ToArray();
         }
