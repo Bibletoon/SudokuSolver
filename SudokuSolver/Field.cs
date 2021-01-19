@@ -16,17 +16,22 @@ namespace SudokuSolver
 
         public Field(string filename) : this()
         {
-            //
-            //: error handling?
-            using var input = new StreamReader(filename);
-            for (int coordinateY = 0; coordinateY < Height; coordinateY++)
+            try
             {
-                string line = input.ReadLine();
-                for (int coordinateX = 0; coordinateX < Width; coordinateX++)
+                using var input = new StreamReader(filename);
+                for (int coordinateY = 0; coordinateY < Height; coordinateY++)
                 {
-                    int num = Int32.Parse(line[coordinateX].ToString());
-                    _field[coordinateY, coordinateX] = num;
+                    string line = input.ReadLine();
+                    for (int coordinateX = 0; coordinateX < Width; coordinateX++)
+                    {
+                        int num = Int32.Parse(line[coordinateX].ToString());
+                        _field[coordinateY, coordinateX] = num;
+                    }
                 }
+            }
+            catch
+            {
+                Console.WriteLine("Couldn't open file. Using empty field.");
             }
         }
 
