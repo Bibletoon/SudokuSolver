@@ -2,8 +2,10 @@
 
 namespace SudokuSolver
 {
+    //TODO: add modificator
     class Game
     {
+        //TODO: name convention
         private Field field;
         private readonly UI UserInterface;
 
@@ -13,6 +15,7 @@ namespace SudokuSolver
             UserInterface = new UI();
         }
 
+        //TODO: use Field instead of string
         public Game(string filename) : this()
         {
             field = new Field(filename);

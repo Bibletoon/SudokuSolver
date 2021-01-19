@@ -25,6 +25,7 @@ namespace SudokuSolver
 
         public bool Solve()
         {
+            //TODO: do better!
             VariantField varField = new VariantField(Field);
             while (!CheckSolved())
             {
@@ -41,6 +42,7 @@ namespace SudokuSolver
                     {
                         if (cell[i] == 1)
                         {
+                            //TODO: check
                             if (y == 1 && x == 0)
                             {
                                 Console.Write("");
@@ -75,6 +77,7 @@ namespace SudokuSolver
                 if (cell[i] == 1) return i;
             }
 
+            //TODO: ensure code will not fail in case when -1 return
             return -1;
         }
     }

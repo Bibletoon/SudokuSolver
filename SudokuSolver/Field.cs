@@ -16,6 +16,7 @@ namespace SudokuSolver
 
         public Field(string filename) : this()
         {
+            //TODO: error handling?
             using var input = new StreamReader(filename);
             for (int i = 0; i < Height; i++)
             {
@@ -40,6 +41,7 @@ namespace SudokuSolver
 
         public override string ToString()
         {
+            //TODO: string builder
             string result = "";
             for (int i = 0; i < Height; i++)
             {

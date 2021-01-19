@@ -99,6 +99,7 @@ namespace SudokuSolver
             return coordList;
         }
 
+        //TODO: named tuple or replace with class
         public (int,int,int) GetMinimalCell()
         {
             (int, int) cell = (-1, -1);
@@ -125,6 +126,7 @@ namespace SudokuSolver
                 }
             }
 
+            //TODO: handle case when (-1, -1)
             return (cell.Item1, cell.Item2, minSum);
         }
 
