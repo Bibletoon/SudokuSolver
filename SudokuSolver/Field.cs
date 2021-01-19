@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace SudokuSolver
 {
@@ -47,19 +48,18 @@ namespace SudokuSolver
 
         public override string ToString()
         {
-            //TODO: string builder
-            string result = "";
+            var result = new StringBuilder("", Height * (Width + 1));
             for (int coordinateY = 0; coordinateY < Height; coordinateY++)
             {
                 for (int coordinateX = 0; coordinateY < Width; coordinateY++)
                 {
-                    result += _field[coordinateX, coordinateY].ToString();
+                    result.Append(_field[coordinateX, coordinateY].ToString());
                 }
 
-                result += "\n";
+                result.Append("\n");
             }
 
-            return result;
+            return result.ToString();
         }
 
         public object Clone()
