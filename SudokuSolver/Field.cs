@@ -18,36 +18,36 @@ namespace SudokuSolver
         {
             //TODO: error handling?
             using var input = new StreamReader(filename);
-            for (int i = 0; i < Height; i++)
+            for (int coordinateY = 0; coordinateY < Height; coordinateY++)
             {
                 string line = input.ReadLine();
-                for (int j = 0; j < Width; j++)
+                for (int coordinateX = 0; coordinateX < Width; coordinateX++)
                 {
-                    int num = Int32.Parse(line[j].ToString());
-                    _field[i, j] = num;
+                    int num = Int32.Parse(line[coordinateX].ToString());
+                    _field[coordinateY, coordinateX] = num;
                 }
             }
         }
 
-        public int GetCell(int h, int w)
+        public int GetCell(int coordinateY, int coordinateX)
         {
-            return _field[h, w];
+            return _field[coordinateY, coordinateX];
         }
 
-        public void SetCell(int h, int w, int value)
+        public void SetCell(int coordinateY, int coordinateX, int value)
         {
-            _field[h, w] = value;
+            _field[coordinateY, coordinateX] = value;
         }
 
         public override string ToString()
         {
             //TODO: string builder
             string result = "";
-            for (int i = 0; i < Height; i++)
+            for (int coordinateY = 0; coordinateY < Height; coordinateY++)
             {
-                for (int j = 0; i < Width; i++)
+                for (int coordinateX = 0; coordinateY < Width; coordinateY++)
                 {
-                    result += _field[j, i].ToString();
+                    result += _field[coordinateX, coordinateY].ToString();
                 }
 
                 result += "\n";
@@ -59,11 +59,11 @@ namespace SudokuSolver
         public object Clone()
         {
             Field cloneField = new Field();
-            for (int i = 0; i < Height; i++)
+            for (int coordinateY = 0; coordinateY < Height; coordinateY++)
             {
-                for (int j = 0; j < Width; j++)
+                for (int coordinateX = 0; coordinateX < Width; coordinateX++)
                 {
-                    cloneField.SetCell(i, j, _field[i, j]);
+                    cloneField.SetCell(coordinateY, coordinateX, _field[coordinateY, coordinateX]);
                 }
             }
 

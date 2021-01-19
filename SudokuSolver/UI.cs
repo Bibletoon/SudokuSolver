@@ -6,12 +6,12 @@ namespace SudokuSolver
     {
         public void LogField(Field field)
         {
-            for (int i = 0; i < Field.Height; i++)
+            for (int coordinateY = 0; coordinateY < Field.Height; coordinateY++)
             {
-                Console.WriteLine($"{(i % 3 == 0 ? "#####################################" : "#---+---+---#---+---+---#---+---+---#")}");
-                for (int j = 0; j < Field.Width; j++)
+                Console.WriteLine($"{(coordinateY % 3 == 0 ? "#####################################" : "#---+---+---#---+---+---#---+---+---#")}");
+                for (int coordinateX = 0; coordinateX < Field.Width; coordinateX++)
                 {
-                    Console.Write($"{(j % 3 == 0 ? "#" : "|")} {(field.GetCell(i, j) == 0 ? " " : field.GetCell(i, j).ToString())} ");
+                    Console.Write($"{(coordinateX % 3 == 0 ? "#" : "|")} {(field.GetCell(coordinateY, coordinateX) == 0 ? " " : field.GetCell(coordinateY, coordinateX).ToString())} ");
                 }
 
                 Console.WriteLine("#");

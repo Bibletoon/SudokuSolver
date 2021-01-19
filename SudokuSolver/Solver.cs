@@ -13,11 +13,11 @@ namespace SudokuSolver
 
         private bool CheckSolved()
         {
-            for (int i = 0; i < Field.Height; i++)
+            for (int coordinateY = 0; coordinateY < Field.Height; coordinateY++)
             {
-                for (int j = 0; j < Field.Width; j++)
+                for (int coordinateX = 0; coordinateX < Field.Width; coordinateX++)
                 {
-                    if (Field.GetCell(i, j) == 0) return false;
+                    if (Field.GetCell(coordinateY, coordinateX) == 0) return false;
                 }
             }
 
@@ -30,8 +30,8 @@ namespace SudokuSolver
             VariantField varField = new VariantField(Field);
             while (!CheckSolved())
             {
-                var (y, x, count) = varField.GetMinimalCell();
-                var cell = varField.GetCell(y, x);
+                var (coordinateY, coordinateX, count) = varField.GetMinimalCell();
+                var cell = varField.GetCell(coordinateY, coordinateX);
                 if (count == 0)
                 {
                     return false;
@@ -39,12 +39,12 @@ namespace SudokuSolver
 
                 if (count != 1)
                 {
-                    for (int i = 1; i < VariantField.NumsCount; i++)
+                    for (int number = 1; number < VariantField.NumsCount; number++)
                     {
-                        if (cell[i] == 1)
+                        if (cell[number] == 1)
                         {
                             var subSolver = new Solver((Field)Field.Clone());
-                            subSolver.Field.SetCell(y, x, i);
+                            subSolver.Field.SetCell(coordinateY, coordinateX, number);
                             if (subSolver.Solve())
                             {
                                 Field = subSolver.Field;
@@ -58,7 +58,7 @@ namespace SudokuSolver
                 else
                 {
                     var cellNum = GetCellNum(cell);
-                    Field.SetCell(y, x, cellNum);
+                    Field.SetCell(coordinateY, coordinateX, cellNum);
                 }
 
                 varField = new VariantField(Field);
@@ -69,9 +69,9 @@ namespace SudokuSolver
 
         private int GetCellNum(int[] cell)
         {
-            for (int i = 1; i < VariantField.NumsCount; i++)
+            for (int number = 1; number < VariantField.NumsCount; number++)
             {
-                if (cell[i] == 1) return i;
+                if (cell[number] == 1) return number;
             }
 
             //TODO: ensure code will not fail in case when -1 return
