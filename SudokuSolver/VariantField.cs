@@ -97,10 +97,9 @@ namespace SudokuSolver
             return coordinatesList;
         }
 
-        //TODO: named tuple or replace with class
-        public (int, int, int) GetMinimalCell()
+        public (int coordinateY, int coordinateX, int count) GetMinimalCell()
         {
-            (int, int) cell = (-1, -1);
+            (int resultCoordinateY, int resultCoordinateX) cell = (-1, -1);
             int minSum = 11;
             for (int coordinateY = 0; coordinateY < SudokuSolver.Field.Height; coordinateY++)
             {
@@ -108,9 +107,9 @@ namespace SudokuSolver
                 {
                     if (Field[coordinateY, coordinateX, 0] == 0) continue;
                     int sum = 0;
-                    for (int k = 1; k < NumsCount; k++)
+                    for (int number = 1; number < NumsCount; number++)
                     {
-                        sum += Field[coordinateY, coordinateX, k];
+                        sum += Field[coordinateY, coordinateX, number];
                     }
 
                     if (sum == 1)
@@ -126,7 +125,7 @@ namespace SudokuSolver
             }
 
             //TODO: handle case when (-1, -1)
-            return (cell.Item1, cell.Item2, minSum);
+            return (cell.resultCoordinateY, cell.resultCoordinateX, minSum);
         }
 
         public int[] GetCell(int h, int w)
