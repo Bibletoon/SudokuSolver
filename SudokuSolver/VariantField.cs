@@ -10,13 +10,13 @@ namespace SudokuSolver
         public VariantField()
         {
             Field = new int[SudokuSolver.Field.Height, SudokuSolver.Field.Width, NumsCount];
-            for (int i = 0; i < SudokuSolver.Field.Height; i++)
+            for (int coordinateY = 0; coordinateY < SudokuSolver.Field.Height; coordinateY++)
             {
-                for (int j = 0; j < SudokuSolver.Field.Width; j++)
+                for (int coordinateX = 0; coordinateX < SudokuSolver.Field.Width; coordinateX++)
                 {
-                    for (int k = 0; k < NumsCount; k++)
+                    for (int number = 0; number < NumsCount; number++)
                     {
-                        Field[i, j, k] = 1;
+                        Field[coordinateY, coordinateX, number] = 1;
                     }
                 }
             }
@@ -24,78 +24,77 @@ namespace SudokuSolver
 
         public VariantField(Field field) : this()
         {
-            for (int i = 0; i < SudokuSolver.Field.Height; i++)
+            for (int coordinateY = 0; coordinateY < SudokuSolver.Field.Height; coordinateY++)
             {
-                for (int j = 0; j < SudokuSolver.Field.Width; j++)
+                for (int coordinateX = 0; coordinateX < SudokuSolver.Field.Width; coordinateX++)
                 {
-                    int curNum = field.GetCell(i, j);
-                    if (curNum != 0) RemoveVariants(i, j, curNum);
+                    int curNum = field.GetCell(coordinateY, coordinateX);
+                    if (curNum != 0) RemoveVariants(coordinateY, coordinateX, curNum);
                 }
             }
         }
 
-        private void RemoveVariants(int h, int w, int curNum)
+        private void RemoveVariants(int coordinateY, int coordinateX, int curNum)
         {
-            Field[h, w, 0] = 0;
+            Field[coordinateY, coordinateX, 0] = 0;
             for (int i = 0; i < SudokuSolver.Field.Height; i++)
             {
-                Field[i, w, curNum] = 0;
+                Field[i, coordinateX, curNum] = 0;
             }
 
             for (int i = 0; i < SudokuSolver.Field.Width; i++)
             {
-                Field[h, i, curNum] = 0;
+                Field[coordinateY, i, curNum] = 0;
             }
 
-            var squareCoords = GetSquareCoords(h, w);
-            foreach (var (i, j) in squareCoords)
+            var squareCoords = GetSquareCoords(coordinateY, coordinateX);
+            foreach (var (coordinateYIterator, coordinateXIterator) in squareCoords)
             {
-                Field[i, j, curNum] = 0;
+                Field[coordinateYIterator, coordinateXIterator, curNum] = 0;
             }
         }
 
-        private List<(int, int)> GetSquareCoords(int h, int w)
+        private List<(int, int)> GetSquareCoords(int coordinateY, int coordinateX)
         {
-            var coordList = new List<(int, int)>();
+            var coordinatesList = new List<(int, int)>();
 
-            //TODO: rewrite this algorythm
-            List<int> coordH;
-            if (h < 3)
+            List<int> coordinatesYList;
+            if (coordinateY < 3)
             {
-                coordH = new List<int> {0, 1, 2};
+                coordinatesYList = new List<int> {0, 1, 2};
             }
-            else if (h > 5)
+            else if (coordinateY > 5)
             {
-                coordH = new List<int> {6, 7, 8};
+                coordinatesYList = new List<int> {6, 7, 8};
             }
             else
             {
-                coordH = new List<int> {3, 4, 5};
+                coordinatesYList = new List<int> {3, 4, 5};
             }
 
-            List<int> coordW;
-            if (w < 3)
+            List<int> coordinatesXList;
+            if (coordinateX < 3)
             {
-                coordW = new List<int> {0, 1, 2};
+                coordinatesXList = new List<int> {0, 1, 2};
             }
-            else if (w > 5)
+            else if (coordinateX > 5)
             {
-                coordW = new List<int> {6, 7, 8};
+                coordinatesXList = new List<int> {6, 7, 8};
             }
             else
             {
-                coordW = new List<int> {3, 4, 5};
+                coordinatesXList = new List<int> {3, 4, 5};
             }
 
-            foreach (var i in coordH)
+            foreach (var coordinateYIterator in coordinatesYList)
             {
-                foreach (var j in coordW)
+                foreach (var coordinateXIterator in coordinatesXList)
                 {
-                    coordList.Add((i, j));
+                    coordinatesList.Add((coordinateYIterator, coordinateXIterator));
                 }
             }
 
-            return coordList;
+            return coordinatesList;
         }
 
         //TODO: named tuple or replace with class
@@ -103,25 +102,25 @@ namespace SudokuSolver
         {
             (int, int) cell = (-1, -1);
             int minSum = 11;
-            for (int i = 0; i < SudokuSolver.Field.Height; i++)
+            for (int coordinateY = 0; coordinateY < SudokuSolver.Field.Height; coordinateY++)
             {
-                for (int j = 0; j < SudokuSolver.Field.Width; j++)
+                for (int coordinateX = 0; coordinateX < SudokuSolver.Field.Width; coordinateX++)
                 {
-                    if (Field[i, j, 0] == 0) continue;
+                    if (Field[coordinateY, coordinateX, 0] == 0) continue;
                     int sum = 0;
                     for (int k = 1; k < NumsCount; k++)
                     {
-                        sum += Field[i, j, k];
+                        sum += Field[coordinateY, coordinateX, k];
                     }
 
                     if (sum == 1)
                     {
-                        return (i, j, 1);
+                        return (coordinateY, coordinateX, 1);
                     }
                     else if (sum < minSum)
                     {
                         minSum = sum;
-                        cell = (i, j);
+                        cell = (coordinateY, coordinateX);
                     }
                 }
             }
