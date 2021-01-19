@@ -7,11 +7,11 @@ namespace SudokuSolver
     {
         public const int Width = 9;
         public const int Height = 9;
-        private readonly int[,] field;
+        private readonly int[,] _field;
 
         public Field()
         {
-            field = new int[Height, Width];
+            _field = new int[Height, Width];
         }
 
         public Field(string filename) : this()
@@ -24,19 +24,19 @@ namespace SudokuSolver
                 for (int j = 0; j < Width; j++)
                 {
                     int num = Int32.Parse(line[j].ToString());
-                    field[i, j] = num;
+                    _field[i, j] = num;
                 }
             }
         }
 
         public int GetCell(int h, int w)
         {
-            return field[h, w];
+            return _field[h, w];
         }
 
         public void SetCell(int h, int w, int value)
         {
-            field[h, w] = value;
+            _field[h, w] = value;
         }
 
         public override string ToString()
@@ -47,8 +47,9 @@ namespace SudokuSolver
             {
                 for (int j = 0; i < Width; i++)
                 {
-                    result += field[j, i].ToString();
+                    result += _field[j, i].ToString();
                 }
+
                 result += "\n";
             }
 
@@ -62,7 +63,7 @@ namespace SudokuSolver
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    cloneField.SetCell(i, j, field[i, j]);
+                    cloneField.SetCell(i, j, _field[i, j]);
                 }
             }
 

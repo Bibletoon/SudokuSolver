@@ -60,6 +60,7 @@ namespace SudokuSolver
                     var cellNum = GetCellNum(cell);
                     Field.SetCell(y, x, cellNum);
                 }
+
                 varField = new VariantField(Field);
             }
 

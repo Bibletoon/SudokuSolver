@@ -5,18 +5,18 @@ namespace SudokuSolver
     internal class VariantField
     {
         public const int NumsCount = 10;
-        public int[,,] field;
+        public int[,,] Field;
 
         public VariantField()
         {
-            field = new int[Field.Height, Field.Width, NumsCount];
-            for (int i = 0; i < Field.Height; i++)
+            Field = new int[SudokuSolver.Field.Height, SudokuSolver.Field.Width, NumsCount];
+            for (int i = 0; i < SudokuSolver.Field.Height; i++)
             {
-                for (int j = 0; j < Field.Width; j++)
+                for (int j = 0; j < SudokuSolver.Field.Width; j++)
                 {
                     for (int k = 0; k < NumsCount; k++)
                     {
-                        field[i, j, k] = 1;
+                        Field[i, j, k] = 1;
                     }
                 }
             }
@@ -24,9 +24,9 @@ namespace SudokuSolver
 
         public VariantField(Field field) : this()
         {
-            for (int i = 0; i < Field.Height; i++)
+            for (int i = 0; i < SudokuSolver.Field.Height; i++)
             {
-                for (int j = 0; j < Field.Width; j++)
+                for (int j = 0; j < SudokuSolver.Field.Width; j++)
                 {
                     int curNum = field.GetCell(i, j);
                     if (curNum != 0) RemoveVariants(i, j, curNum);
@@ -36,21 +36,21 @@ namespace SudokuSolver
 
         private void RemoveVariants(int h, int w, int curNum)
         {
-            field[h, w, 0] = 0;
-            for (int i = 0; i < Field.Height; i++)
+            Field[h, w, 0] = 0;
+            for (int i = 0; i < SudokuSolver.Field.Height; i++)
             {
-                field[i, w, curNum] = 0;
+                Field[i, w, curNum] = 0;
             }
 
-            for (int i = 0; i < Field.Width; i++)
+            for (int i = 0; i < SudokuSolver.Field.Width; i++)
             {
-                field[h, i, curNum] = 0;
+                Field[h, i, curNum] = 0;
             }
 
             var squareCoords = GetSquareCoords(h, w);
             foreach (var (i, j) in squareCoords)
             {
-                field[i, j, curNum] = 0;
+                Field[i, j, curNum] = 0;
             }
         }
 
@@ -62,29 +62,29 @@ namespace SudokuSolver
             List<int> coordH;
             if (h < 3)
             {
-                coordH = new List<int> { 0, 1, 2 };
+                coordH = new List<int> {0, 1, 2};
             }
             else if (h > 5)
             {
-                coordH = new List<int> { 6, 7, 8 };
+                coordH = new List<int> {6, 7, 8};
             }
             else
             {
-                coordH = new List<int> { 3, 4, 5 };
+                coordH = new List<int> {3, 4, 5};
             }
 
             List<int> coordW;
             if (w < 3)
             {
-                coordW = new List<int> { 0, 1, 2 };
+                coordW = new List<int> {0, 1, 2};
             }
             else if (w > 5)
             {
-                coordW = new List<int> { 6, 7, 8 };
+                coordW = new List<int> {6, 7, 8};
             }
             else
             {
-                coordW = new List<int> { 3, 4, 5 };
+                coordW = new List<int> {3, 4, 5};
             }
 
             foreach (var i in coordH)
@@ -103,15 +103,15 @@ namespace SudokuSolver
         {
             (int, int) cell = (-1, -1);
             int minSum = 11;
-            for (int i = 0; i < Field.Height; i++)
+            for (int i = 0; i < SudokuSolver.Field.Height; i++)
             {
-                for (int j = 0; j < Field.Width; j++)
+                for (int j = 0; j < SudokuSolver.Field.Width; j++)
                 {
-                    if (field[i, j, 0] == 0) continue;
+                    if (Field[i, j, 0] == 0) continue;
                     int sum = 0;
                     for (int k = 1; k < NumsCount; k++)
                     {
-                        sum += field[i, j, k];
+                        sum += Field[i, j, k];
                     }
 
                     if (sum == 1)
@@ -135,8 +135,9 @@ namespace SudokuSolver
             List<int> cell = new List<int>();
             for (int i = 0; i < NumsCount; i++)
             {
-                cell.Add(field[h, w, i]);
+                cell.Add(Field[h, w, i]);
             }
+
             return cell.ToArray();
         }
     }

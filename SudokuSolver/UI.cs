@@ -13,6 +13,7 @@ namespace SudokuSolver
                 {
                     Console.Write($"{(j % 3 == 0 ? "#" : "|")} {(field.GetCell(i, j) == 0 ? " " : field.GetCell(i, j).ToString())} ");
                 }
+
                 Console.WriteLine("#");
             }
 

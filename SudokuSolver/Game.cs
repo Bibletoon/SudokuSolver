@@ -2,37 +2,35 @@
 
 namespace SudokuSolver
 {
-    //TODO: add modificator
     internal class Game
     {
-        //TODO: name convention
-        private Field field;
+        private Field _field;
 
-        private readonly UI UserInterface;
+        private readonly UI _userInterface;
 
         public Game()
         {
-            field = new Field();
-            UserInterface = new UI();
+            _field = new Field();
+            _userInterface = new UI();
         }
 
         //TODO: use Field instead of string
         public Game(string filename) : this()
         {
-            field = new Field(filename);
+            _field = new Field(filename);
         }
 
         public void StartSolving()
         {
-            UserInterface.LogField(field);
+            _userInterface.LogField(_field);
             Console.WriteLine("Press any key to solve this sudoku");
             Console.ReadKey(true);
-            Solver mySolver = new Solver(field);
+            Solver mySolver = new Solver(_field);
             var result = mySolver.Solve();
             if (result)
             {
-                field = mySolver.Field;
-                UserInterface.LogField(field);
+                _field = mySolver.Field;
+                _userInterface.LogField(_field);
                 Console.WriteLine("Sudoku is solved!");
             }
             else
