@@ -16,7 +16,8 @@ namespace SudokuSolver
 
         public Field(string filename) : this()
         {
-            //TODO: error handling?
+            //
+            //: error handling?
             using var input = new StreamReader(filename);
             for (int coordinateY = 0; coordinateY < Height; coordinateY++)
             {

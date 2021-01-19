@@ -8,7 +8,8 @@ namespace SudokuSolver
         {
             Console.Write("Enter filename with field (leave blank to use default field.txt): ");
             string filename = Console.ReadLine();
-            Game game = new Game(filename == "" ? "field.txt" : filename);
+            Field field = new Field(filename == "" ? "field.txt" : filename);
+            Game game = new Game(field);
             game.StartSolving();
         }
     }

@@ -27,7 +27,7 @@ namespace SudokuSolver
         public bool Solve()
         {
             //TODO: do better!
-            VariantField varField = new VariantField(Field);
+            var varField = new VariantField(Field);
             while (!CheckSolved())
             {
                 var (coordinateY, coordinateX, count) = varField.GetMinimalCell();
@@ -77,7 +77,6 @@ namespace SudokuSolver
                 if (cell[number] == 1) return number;
             }
 
-            //TODO: ensure code will not fail in case when -1 return
             return -1;
         }
     }

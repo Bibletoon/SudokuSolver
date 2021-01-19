@@ -14,10 +14,9 @@ namespace SudokuSolver
             _userInterface = new UI();
         }
 
-        //TODO: use Field instead of string
-        public Game(string filename) : this()
+        public Game(Field field) : this()
         {
-            _field = new Field(filename);
+            _field = field;
         }
 
         public void StartSolving()
