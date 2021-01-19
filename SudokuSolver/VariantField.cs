@@ -5,18 +5,17 @@ namespace SudokuSolver
 {
     class VariantField
     {
-        //TODO: Learn, how to implement "constants" properly
-        public static int numsCount = 10;
+        public const int NumsCount = 10;
         public int[,,] field;
 
         public VariantField()
         {
-            field = new int[Field.Height, Field.Width, numsCount];
+            field = new int[Field.Height, Field.Width, NumsCount];
             for (int i = 0; i < Field.Height; i++)
             {
                 for (int j = 0; j < Field.Width; j++)
                 {
-                    for (int k = 0; k < numsCount; k++)
+                    for (int k = 0; k < NumsCount; k++)
                     {
                         field[i, j, k] = 1;
                     }
@@ -110,7 +109,7 @@ namespace SudokuSolver
                 {
                     if (field[i, j, 0] == 0) continue;
                     int sum = 0;
-                    for (int k = 1; k < numsCount; k++)
+                    for (int k = 1; k < NumsCount; k++)
                     {
                         sum += field[i, j, k];
                     }
@@ -133,7 +132,7 @@ namespace SudokuSolver
         public int[] GetCell(int h, int w)
         {
             List<int> cell = new List<int>();
-            for (int i = 0; i < numsCount; i++)
+            for (int i = 0; i < NumsCount; i++)
             {
                 cell.Add(field[h,w,i]);
             }

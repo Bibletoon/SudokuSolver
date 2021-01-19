@@ -5,9 +5,8 @@ namespace SudokuSolver
 {
     class Field : ICloneable
     {
-        //TODO: Learn, how to implement "constants" properly
-        public static int Width = 9;
-        public static int Height = 9;
+        public const int Width = 9;
+        public const int Height = 9;
         private readonly int[,] field;
 
         public Field() {

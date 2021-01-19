@@ -38,7 +38,7 @@ namespace SudokuSolver
 
                 if (count!=1)
                 {
-                    for (int i = 1; i < VariantField.numsCount; i++)
+                    for (int i = 1; i < VariantField.NumsCount; i++)
                     {
                         if (cell[i] == 1)
                         {
@@ -72,7 +72,7 @@ namespace SudokuSolver
 
         private int GetCellNum(int[] cell)
         {
-            for (int i = 1; i < VariantField.numsCount; i++)
+            for (int i = 1; i < VariantField.NumsCount; i++)
             {
                 if (cell[i] == 1) return i;
             }
