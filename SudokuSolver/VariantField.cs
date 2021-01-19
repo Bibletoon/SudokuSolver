@@ -124,7 +124,6 @@ namespace SudokuSolver
                 }
             }
 
-            //TODO: handle case when (-1, -1)
             return (cell.resultCoordinateY, cell.resultCoordinateX, minSum);
         }
 

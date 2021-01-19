@@ -31,11 +31,14 @@ namespace SudokuSolver
             while (!CheckSolved())
             {
                 var (coordinateY, coordinateX, count) = varField.GetMinimalCell();
-                var cell = varField.GetCell(coordinateY, coordinateX);
-                if (count == 0)
+
+                if (count == 0 || count == 11)
                 {
                     return false;
                 }
+
+                var cell = varField.GetCell(coordinateY, coordinateX);
+                
 
                 if (count != 1)
                 {
