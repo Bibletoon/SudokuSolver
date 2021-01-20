@@ -14,11 +14,9 @@ namespace SudokuSolver
         private bool CheckSolved()
         {
             for (int coordinateY = 0; coordinateY < Field.Height; coordinateY++)
+            for (int coordinateX = 0; coordinateX < Field.Width; coordinateX++)
             {
-                for (int coordinateX = 0; coordinateX < Field.Width; coordinateX++)
-                {
-                    if (Field.GetCell(coordinateY, coordinateX) == 0) return false;
-                }
+                if (Field.GetCell(coordinateY, coordinateX) == 0) return false;
             }
 
             return true;

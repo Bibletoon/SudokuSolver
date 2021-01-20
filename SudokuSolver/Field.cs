@@ -66,12 +66,11 @@ namespace SudokuSolver
         {
             Field cloneField = new Field();
             for (int coordinateY = 0; coordinateY < Height; coordinateY++)
+            for (int coordinateX = 0; coordinateX < Width; coordinateX++)
             {
-                for (int coordinateX = 0; coordinateX < Width; coordinateX++)
-                {
-                    cloneField.SetCell(coordinateY, coordinateX, _field[coordinateY, coordinateX]);
-                }
+                cloneField.SetCell(coordinateY, coordinateX, _field[coordinateY, coordinateX]);
             }
+            
 
             return cloneField;
         }
