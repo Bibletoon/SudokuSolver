@@ -14,6 +14,7 @@ namespace SudokuSolver
                 edgeLine.Append(new string('#', 12));
                 middleLine.Append("---+---+---#");
             }
+            
             for (int coordinateY = 0; coordinateY < Field.Height; coordinateY++)
             {
                 Console.WriteLine($"{(coordinateY % 3 == 0 ? edgeLine.ToString() : middleLine.ToString())}");
